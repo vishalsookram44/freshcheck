@@ -6,18 +6,19 @@
 <title>FreshCheck — Know your temperature. Protect your food.</title>
 <meta name="description" content="FreshCheck is a subscription IoT temperature-monitoring service for restaurants, supermarkets, caterers and distributors in Trinidad & Tobago. Real-time alerts, temperature history, one dashboard.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="img/bg-hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#06302d;--deep:#0b4f4a;--mint:#7ff0c4;--ice:#eef8f5;--paper:#fbfefd;--mut:#4f6f6b;--warn:#e4572e;--line:#d3e6e1;--r:18px}
+:root{--ink:#2b4630;--deep:#4f7a46;--mint:#cfe88f;--ice:#e7eed0;--paper:#f2f5de;--mut:#55694f;--warn:#e4572e;--line:#d3deb4;--r:18px}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
 body{font-family:'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
 a{color:inherit}
 .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
 .mono{font-family:'JetBrains Mono',monospace}
-nav{position:sticky;top:0;z-index:20;background:rgba(251,254,253,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav{position:sticky;top:0;z-index:20;background:rgba(242,245,222,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.35rem;text-decoration:none;letter-spacing:-.02em}
 .logo svg{width:34px;height:34px}
@@ -27,46 +28,46 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .btn:hover{background:var(--ink);transform:translateY(-1px)}
 .btn.alt{background:transparent;color:var(--ink)!important;border:1.5px solid var(--ink)}
 .btn.alt:hover{background:var(--ink);color:#fff!important}
-.hero{background:linear-gradient(180deg,var(--ice),var(--paper));padding:70px 0 40px}
+.hero{padding:34px 14px 14px}
 .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
 .tag{display:inline-block;background:var(--deep);color:var(--mint);font-size:.78rem;padding:5px 12px;border-radius:99px;margin-bottom:18px}
 h1{font-size:clamp(2.3rem,5vw,3.9rem);line-height:1.04;letter-spacing:-.035em;font-weight:800}
 h1 em{font-style:normal;color:var(--deep);background:linear-gradient(transparent 62%,var(--mint) 62%)}
 .hero p.lead{font-size:1.15rem;color:var(--mut);margin:20px 0 28px;max-width:34em}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
-.panel{background:var(--ink);color:#e6fff6;border-radius:var(--r);padding:20px;box-shadow:0 30px 60px -25px rgba(6,48,45,.55)}
+.panel{background:var(--ink);color:#f4f9e8;border-radius:var(--r);padding:20px;box-shadow:0 30px 60px -25px rgba(43,70,48,.55)}
 .panel h3{font-size:.8rem;font-weight:400;color:var(--mint);display:flex;justify-content:space-between}
 .live::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mint);margin-right:6px;animation:p 1.4s infinite}
 @keyframes p{50%{opacity:.25}}
 .units{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
-.unit{background:#0d3f3b;border-radius:12px;padding:12px;border:1.5px solid transparent;transition:.3s}
+.unit{background:#365a3a;border-radius:12px;padding:12px;border:1.5px solid transparent;transition:.3s}
 .unit.bad{border-color:var(--warn);background:#4a1f14}
-.unit small{color:#9fd6c6;font-size:.75rem;display:block}
+.unit small{color:#bcd8a6;font-size:.75rem;display:block}
 .unit b{font-size:1.9rem;font-weight:600}
 .unit .st{font-size:.7rem;float:right;margin-top:6px}
 .unit svg{width:100%;height:34px;display:block;margin-top:4px}
 .unit svg polyline{fill:none;stroke:var(--mint);stroke-width:2}
 .unit.bad svg polyline{stroke:#ff9a7a}
-#log{font-size:.75rem;color:#9fd6c6;min-height:54px;max-height:54px;overflow:hidden}
+#log{font-size:.75rem;color:#bcd8a6;min-height:54px;max-height:54px;overflow:hidden}
 #log div{padding:1px 0}#log .a{color:#ff9a7a}
 .panel .row{display:flex;gap:8px;margin-top:10px}
-.panel button{flex:1;background:transparent;color:#e6fff6;border:1px solid #2e6b64;border-radius:10px;padding:9px;font:inherit;font-size:.85rem;cursor:pointer}
-.panel button:hover{background:#0d3f3b}
-section{padding:78px 0}
+.panel button{flex:1;background:transparent;color:#f4f9e8;border:1px solid #557d55;border-radius:10px;padding:9px;font:inherit;font-size:.85rem;cursor:pointer}
+.panel button:hover{background:#365a3a}
+section{padding:26px 14px}
 h2{font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:14px}
 .sub{color:var(--mut);max-width:38em;margin-bottom:36px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px}
 .card .n{font-family:'JetBrains Mono',monospace;color:var(--deep);font-size:.85rem;background:var(--ice);display:inline-block;padding:3px 10px;border-radius:99px;margin-bottom:12px}
 .card h3{font-size:1.2rem;margin-bottom:6px}.card p{color:var(--mut);font-size:.97rem}
-.alt-bg{background:var(--ice)}
+
 .story{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .story .card.bad{border-color:#f1c4b6;background:#fff7f4}
 .story .card.good{border-color:#a8e6cf;background:#f2fdf8}
 .plans{align-items:stretch}
 .plan{display:flex;flex-direction:column}
-.plan.pop{background:var(--ink);color:#e6fff6;border-color:var(--ink)}
-.plan.pop p,.plan.pop li{color:#b6ded3}
+.plan.pop{background:var(--ink);color:#f4f9e8;border-color:var(--ink)}
+.plan.pop p,.plan.pop li{color:#cfe1c0}
 .price{font-size:2.5rem;font-weight:800;letter-spacing:-.03em;margin:8px 0}
 .price small{font-size:1rem;font-weight:400;color:var(--mut)}
 .plan ul{list-style:none;padding:0;margin:14px 0 22px;flex:1}
@@ -75,8 +76,18 @@ h2{font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-.03em;line-height:1.1;ma
 .plan.pop li::before{color:var(--mint)}
 .plan.pop .btn{background:var(--mint);color:var(--ink)!important}
 .note{font-size:.85rem;color:var(--mut);margin-top:16px}
-.who{display:flex;flex-wrap:wrap;gap:10px}
-.who span{border:1.5px solid var(--deep);padding:8px 18px;border-radius:99px;font-weight:600;font-size:.95rem}
+#bg{position:fixed;inset:0;z-index:-1;background:var(--paper)}
+.bgl{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity .9s ease}
+.bgl.on{opacity:1}
+.bgl[data-k=a]{background-image:url(img/bg-hero.jpg)}
+.bgl[data-k=b]{background-image:url(img/bg-problem.jpg)}
+.hero>.wrap,section>.wrap{max-width:1060px;background:rgba(242,245,222,.9);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);border-radius:28px;padding:46px 44px;box-shadow:0 18px 50px -28px rgba(43,70,48,.45)}
+#who{padding:0;background:var(--paper) url(img/bg-who.jpg) center/cover no-repeat;aspect-ratio:16/9;display:flex;align-items:center}
+.split-in{margin-left:46%;width:48%;padding:20px 0}
+.starlist{list-style:none;padding:0;margin:0}
+.starlist li{display:flex;align-items:center;gap:16px;padding:13px 4px;font-size:clamp(1rem,1.9vw,1.5rem);font-weight:500;border-bottom:3px dashed #b5c261}
+.starlist li:last-child{border-bottom:0}
+.starlist li::before{content:"";flex:0 0 34px;height:34px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f6c56a' d='M12 1.5l3 7.2 7.7.6-5.9 5 1.9 7.5L12 17.9 5.3 21.8l1.9-7.5-5.9-5 7.7-.6z' transform='rotate(-12 12 12)'/%3E%3C/svg%3E") center/contain no-repeat}
 form{display:grid;gap:12px;max-width:520px}
 input,select,textarea{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:#fff}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--mint);border-color:var(--deep)}
@@ -85,23 +96,23 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--mint);border-col
 .stat{border-left:4px solid var(--mint);background:#fff;padding:18px 20px;border-radius:0 var(--r) var(--r) 0}
 .stat b{display:block;font-size:2.4rem;font-weight:800;letter-spacing:-.03em;color:var(--deep);line-height:1.1}
 .stat span{font-size:.92rem;color:var(--mut)}
-.calc{background:var(--ink);color:#e6fff6;border-radius:var(--r);padding:30px;display:grid;grid-template-columns:1.1fr 1fr;gap:34px}
+.calc{background:var(--ink);color:#f4f9e8;border-radius:var(--r);padding:30px;display:grid;grid-template-columns:1.1fr 1fr;gap:34px}
 .calc h3{font-size:1.5rem;letter-spacing:-.02em;margin-bottom:6px}
-.calc p{color:#b6ded3;font-size:.95rem}
+.calc p{color:#cfe1c0;font-size:.95rem}
 .calc label{display:block;font-size:.85rem;color:var(--mint);margin-top:16px}
-.calc input[type=number]{background:#0d3f3b;border-color:#2e6b64;color:#fff;margin-top:4px}
+.calc input[type=number]{background:#365a3a;border-color:#557d55;color:#fff;margin-top:4px}
 .calc input[type=range]{padding:0;border:0;accent-color:var(--mint);margin-top:6px}
-.res{background:#0d3f3b;border-radius:14px;padding:22px;align-self:center}
-.res small{color:#9fd6c6;display:block;font-size:.8rem}
+.res{background:#365a3a;border-radius:14px;padding:22px;align-self:center}
+.res small{color:#bcd8a6;display:block;font-size:.8rem}
 .res .big{font-size:2.5rem;font-weight:800;letter-spacing:-.03em;color:#ff9a7a;line-height:1.1;margin:2px 0 14px}
 .res .big.ok{color:var(--mint)}
-.res .line{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid #1f5a54;font-size:.92rem}
+.res .line{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid #456b46;font-size:.92rem}
 .src{font-size:.8rem;color:var(--mut);margin-top:14px}
 #formErr{display:none;background:#fff1ec;border:1px solid #f1c4b6;padding:14px;border-radius:12px}
 .hp{position:absolute;left:-9999px}
 .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
-footer{background:var(--ink);color:#b6ded3;padding:56px 0 30px}
-footer .vals{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:28px 0;padding:28px 0;border-top:1px solid #1f5a54;border-bottom:1px solid #1f5a54}
+footer{background:var(--ink);color:#cfe1c0;padding:56px 0 30px}
+footer .vals{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:28px 0;padding:28px 0;border-top:1px solid #456b46;border-bottom:1px solid #456b46}
 footer .vals b{color:var(--mint);display:block;font-size:1.05rem;margin-bottom:4px}
 footer .vals span{font-size:.9rem}
 footer .top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
@@ -109,7 +120,7 @@ footer .logo{color:#fff}
 .slogan{font-size:1.25rem;color:#fff;font-weight:600;letter-spacing:-.01em}
 .small{font-size:.8rem;margin-top:8px}
 #chatBtn{position:fixed;right:20px;bottom:20px;z-index:30;width:56px;height:56px;border-radius:50%;background:var(--deep);color:#fff;border:0;font-size:1.5rem;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.25)}
-#chat{position:fixed;right:20px;bottom:88px;z-index:30;width:320px;max-width:calc(100vw - 40px);background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:0 20px 50px rgba(6,48,45,.3);display:none;overflow:hidden}
+#chat{position:fixed;right:20px;bottom:88px;z-index:30;width:320px;max-width:calc(100vw - 40px);background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:0 20px 50px rgba(43,70,48,.3);display:none;overflow:hidden}
 #chat header{background:var(--deep);color:#fff;padding:12px 16px;font-weight:600}
 #msgs{height:220px;overflow:auto;padding:12px;font-size:.9rem;display:flex;flex-direction:column;gap:8px}
 #msgs div{padding:8px 12px;border-radius:12px;max-width:88%}
@@ -117,15 +128,16 @@ footer .logo{color:#fff}
 #qs{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 12px}
 #qs button{border:1px solid var(--deep);background:#fff;border-radius:99px;padding:5px 11px;font:inherit;font-size:.78rem;cursor:pointer}
 #qs button:hover{background:var(--ice)}
-@media(max-width:860px){.stats,.calc{grid-template-columns:1fr}.hero .wrap,.demo-grid,.grid3,.story{grid-template-columns:1fr}footer .vals{grid-template-columns:1fr 1fr}.links a:not(.btn){display:none}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+@media(max-width:860px){.hero>.wrap,section>.wrap{padding:28px 20px;background:rgba(242,245,222,.95)}#who{aspect-ratio:auto;background-size:auto 230px;background-position:left top;padding:230px 14px 26px}.split-in{margin:0;width:100%;background:rgba(242,245,222,.95);border-radius:22px;padding:24px 20px}.stats,.calc{grid-template-columns:1fr}.hero .wrap,.demo-grid,.grid3,.story{grid-template-columns:1fr}footer .vals{grid-template-columns:1fr 1fr}.links a:not(.btn){display:none}}
+@media(prefers-reduced-motion:reduce){.bgl{transition:none}*{animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<div id="bg" aria-hidden="true"><div class="bgl on" data-k="a"></div><div class="bgl" data-k="b"></div></div>
 
 <nav><div class="wrap">
   <a href="#" class="logo" aria-label="FreshCheck home">
-    <svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0b4f4a"/><path d="M18 34l10 10 18-22" fill="none" stroke="#7ff0c4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#4f7a46"/><path d="M18 34l10 10 18-22" fill="none" stroke="#cfe88f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     FreshCheck
   </a>
   <div class="links">
@@ -134,7 +146,7 @@ footer .logo{color:#fff}
   </div>
 </div></nav>
 
-<header class="hero"><div class="wrap">
+<header class="hero" data-bg="a"><div class="wrap">
   <div>
     <span class="tag mono">IoT FOOD-SAFETY MONITORING</span>
     <h1>Know your temperature. <em>Protect your food.</em></h1>
@@ -149,7 +161,7 @@ footer .logo{color:#fff}
   </div>
 </div></header>
 
-<section id="problem"><div class="wrap">
+<section id="problem" data-bg="b"><div class="wrap">
   <h2>The problem: you find out too late.</h2>
   <p class="sub">Manual temperature checks only tell you the temperature at the moment someone looks. Everything in between is a blind spot.</p>
   <div class="story">
@@ -158,7 +170,7 @@ footer .logo{color:#fff}
   </div>
 </div></section>
 
-<section id="why-now" class="alt-bg"><div class="wrap">
+<section id="why-now" data-bg="b" class="alt-bg"><div class="wrap">
   <h2>Why now: food waste is expensive</h2>
   <p class="sub">Food waste is a global problem, and food service and retail are a large part of it. Cold storage failures are one of the most preventable causes for a business.</p>
   <div class="stats">
@@ -188,7 +200,7 @@ footer .logo{color:#fff}
   <p class="src">Global figures: UN Environment Programme, Food Waste Index Report 2024 (data for 2022). Calculator uses your inputs only and excludes setup fees.</p>
 </div></section>
 
-<section id="how"><div class="wrap">
+<section id="how" data-bg="b"><div class="wrap">
   <h2>How FreshCheck works</h2>
   <p class="sub">Sensors, cloud platform and dashboard — delivered as one simple monthly service.</p>
   <div class="grid3">
@@ -198,7 +210,7 @@ footer .logo{color:#fff}
   </div>
 </div></section>
 
-<section id="why" class="alt-bg"><div class="wrap">
+<section id="why" data-bg="b" class="alt-bg"><div class="wrap">
   <h2>What you get</h2>
   <p class="sub">Three benefits that protect your stock and your reputation.</p>
   <div class="grid3">
@@ -209,13 +221,13 @@ footer .logo{color:#fff}
   <p class="note">Coming next: analytics that flag patterns, such as a fridge that warms up at the same time every day.</p>
 </div></section>
 
-<section id="who"><div class="wrap">
+<section id="who"><div class="split-in">
   <h2>Built for food businesses</h2>
-  <p class="sub">Especially small and medium-sized businesses that want reliable monitoring without enterprise complexity or cost.</p>
-  <div class="who"><span>Restaurants</span><span>Supermarkets</span><span>Caterers</span><span>Food distributors</span><span>Hotels</span><span>Grocery delivery</span></div>
+  <p class="sub" style="margin-bottom:14px">Especially small and medium-sized businesses that want reliable monitoring without enterprise complexity or cost.</p>
+  <ul class="starlist"><li>Restaurants</li><li>Supermarkets</li><li>Caterers</li><li>Food distributors</li><li>Hotels</li><li>Grocery delivery</li></ul>
 </div></section>
 
-<section id="pricing"><div class="wrap">
+<section id="pricing" data-bg="a"><div class="wrap">
   <h2>Simple monthly pricing</h2>
   <p class="sub">Pay monthly for continuous monitoring instead of buying a system outright.</p>
   <div class="grid3 plans">
@@ -226,11 +238,11 @@ footer .logo{color:#fff}
   <p class="note">A one-time setup and installation fee covers the initial sensors and installation. Pricing shown in Trinidad &amp; Tobago dollars.</p>
 </div></section>
 
-<section id="demo" class="alt-bg"><div class="wrap demo-grid">
+<section id="demo" data-bg="a" class="alt-bg"><div class="wrap demo-grid">
   <div>
     <h2>Book your free demo</h2>
     <p class="sub">See FreshCheck monitor a real fridge, ask questions, and find the right plan. After signing up you'll get a short email series explaining how it all works.</p>
-    <p class="mono" style="font-size:.85rem;color:var(--mut)">Or email us: <a href="mailto:freshcheck.tt@gmail.com">freshcheck.tt@gmail.com</a></p>
+    <p class="mono" style="font-size:.85rem;color:var(--mut)">Or email us: <a href="mailto:hello@freshcheck.tt">hello@freshcheck.tt</a></p>
   </div>
   <div>
     <form id="form" novalidate>
@@ -249,7 +261,7 @@ footer .logo{color:#fff}
 
 <footer><div class="wrap">
   <div class="top">
-    <a href="#" class="logo"><svg viewBox="0 0 64 64" width="34" height="34"><rect width="64" height="64" rx="16" fill="#0b4f4a"/><path d="M18 34l10 10 18-22" fill="none" stroke="#7ff0c4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>FreshCheck</a>
+    <a href="#" class="logo"><svg viewBox="0 0 64 64" width="34" height="34"><rect width="64" height="64" rx="16" fill="#4f7a46"/><path d="M18 34l10 10 18-22" fill="none" stroke="#cfe88f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>FreshCheck</a>
     <div class="slogan">Know your temperature. Protect your food.</div>
   </div>
   <div class="vals">
@@ -271,6 +283,17 @@ footer .logo{color:#fff}
 
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ---------- Scroll-linked background ---------- */
+(function(){
+  const layers=[...document.querySelectorAll('.bgl')],secs=[...document.querySelectorAll('[data-bg]')];let cur='a',t=false;
+  function upd(){t=false;const mid=innerHeight*.5;let k=null;
+    secs.forEach(x=>{const r=x.getBoundingClientRect();if(r.top<=mid&&r.bottom>=mid)k=x.dataset.bg});
+    if(k&&k!==cur){cur=k;layers.forEach(l=>l.classList.toggle('on',l.dataset.k===k))}}
+  addEventListener('scroll',()=>{if(!t){t=true;requestAnimationFrame(upd)}},{passive:true});
+  addEventListener('resize',upd);upd();
+  const p=new Image();p.src='img/bg-problem.jpg'; // warm the cache
+})();
 
 /* ---------- Live demo (simulated) ---------- */
 const MIN=0,MAX=5;
@@ -306,8 +329,8 @@ document.getElementById('fix').onclick=()=>{failing=false;say('Cooling restored'
 /* ---------- Lead capture (Web3Forms) ---------- */
 // 1) Get a free access key at https://web3forms.com (enter your email, key is emailed to you)
 // 2) Paste it below. Leads will arrive in that inbox.
-const WEB3FORMS_KEY='0f3da5d3-a392-433b-9ba4-e9bb593b9e43';
-const FALLBACK_EMAIL='freshcheck.tt@gmail.com';
+const WEB3FORMS_KEY='PASTE_YOUR_ACCESS_KEY_HERE';
+const FALLBACK_EMAIL='hello@freshcheck.tt';
 const form=document.getElementById('form'),ok=document.getElementById('ok'),err=document.getElementById('formErr'),sendBtn=document.getElementById('sendBtn');
 form.addEventListener('submit',async e=>{
   e.preventDefault();ok.style.display=err.style.display='none';
