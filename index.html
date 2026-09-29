@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FreshCheck — Know your temperature. Protect your food.</title>
+<meta name="description" content="FreshCheck is a subscription IoT temperature-monitoring service for restaurants, supermarkets, caterers and distributors in Trinidad & Tobago. Real-time alerts, temperature history, one dashboard.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#06302d;--deep:#0b4f4a;--mint:#7ff0c4;--ice:#eef8f5;--paper:#fbfefd;--mut:#4f6f6b;--warn:#e4572e;--line:#d3e6e1;--r:18px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.mono{font-family:'JetBrains Mono',monospace}
+nav{position:sticky;top:0;z-index:20;background:rgba(251,254,253,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.35rem;text-decoration:none;letter-spacing:-.02em}
+.logo svg{width:34px;height:34px}
+.links{display:flex;gap:22px;align-items:center;font-size:.95rem}
+.links a{text-decoration:none;color:var(--mut)}.links a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--deep);color:#fff!important;padding:12px 22px;border-radius:99px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font:inherit;font-weight:600;transition:.2s}
+.btn:hover{background:var(--ink);transform:translateY(-1px)}
+.btn.alt{background:transparent;color:var(--ink)!important;border:1.5px solid var(--ink)}
+.btn.alt:hover{background:var(--ink);color:#fff!important}
+.hero{background:linear-gradient(180deg,var(--ice),var(--paper));padding:70px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+.tag{display:inline-block;background:var(--deep);color:var(--mint);font-size:.78rem;padding:5px 12px;border-radius:99px;margin-bottom:18px}
+h1{font-size:clamp(2.3rem,5vw,3.9rem);line-height:1.04;letter-spacing:-.035em;font-weight:800}
+h1 em{font-style:normal;color:var(--deep);background:linear-gradient(transparent 62%,var(--mint) 62%)}
+.hero p.lead{font-size:1.15rem;color:var(--mut);margin:20px 0 28px;max-width:34em}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.panel{background:var(--ink);color:#e6fff6;border-radius:var(--r);padding:20px;box-shadow:0 30px 60px -25px rgba(6,48,45,.55)}
+.panel h3{font-size:.8rem;font-weight:400;color:var(--mint);display:flex;justify-content:space-between}
+.live::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mint);margin-right:6px;animation:p 1.4s infinite}
+@keyframes p{50%{opacity:.25}}
+.units{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.unit{background:#0d3f3b;border-radius:12px;padding:12px;border:1.5px solid transparent;transition:.3s}
+.unit.bad{border-color:var(--warn);background:#4a1f14}
+.unit small{color:#9fd6c6;font-size:.75rem;display:block}
+.unit b{font-size:1.9rem;font-weight:600}
+.unit .st{font-size:.7rem;float:right;margin-top:6px}
+.unit svg{width:100%;height:34px;display:block;margin-top:4px}
+.unit svg polyline{fill:none;stroke:var(--mint);stroke-width:2}
+.unit.bad svg polyline{stroke:#ff9a7a}
+#log{font-size:.75rem;color:#9fd6c6;min-height:54px;max-height:54px;overflow:hidden}
+#log div{padding:1px 0}#log .a{color:#ff9a7a}
+.panel .row{display:flex;gap:8px;margin-top:10px}
+.panel button{flex:1;background:transparent;color:#e6fff6;border:1px solid #2e6b64;border-radius:10px;padding:9px;font:inherit;font-size:.85rem;cursor:pointer}
+.panel button:hover{background:#0d3f3b}
+section{padding:78px 0}
+h2{font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:14px}
+.sub{color:var(--mut);max-width:38em;margin-bottom:36px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.card .n{font-family:'JetBrains Mono',monospace;color:var(--deep);font-size:.85rem;background:var(--ice);display:inline-block;padding:3px 10px;border-radius:99px;margin-bottom:12px}
+.card h3{font-size:1.2rem;margin-bottom:6px}.card p{color:var(--mut);font-size:.97rem}
+.alt-bg{background:var(--ice)}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.story .card.bad{border-color:#f1c4b6;background:#fff7f4}
+.story .card.good{border-color:#a8e6cf;background:#f2fdf8}
+.plans{align-items:stretch}
+.plan{display:flex;flex-direction:column}
+.plan.pop{background:var(--ink);color:#e6fff6;border-color:var(--ink)}
+.plan.pop p,.plan.pop li{color:#b6ded3}
+.price{font-size:2.5rem;font-weight:800;letter-spacing:-.03em;margin:8px 0}
+.price small{font-size:1rem;font-weight:400;color:var(--mut)}
+.plan ul{list-style:none;padding:0;margin:14px 0 22px;flex:1}
+.plan li{padding:6px 0 6px 26px;position:relative;color:var(--mut);font-size:.95rem}
+.plan li::before{content:"✓";position:absolute;left:0;color:var(--deep);font-weight:800}
+.plan.pop li::before{color:var(--mint)}
+.plan.pop .btn{background:var(--mint);color:var(--ink)!important}
+.note{font-size:.85rem;color:var(--mut);margin-top:16px}
+.who{display:flex;flex-wrap:wrap;gap:10px}
+.who span{border:1.5px solid var(--deep);padding:8px 18px;border-radius:99px;font-weight:600;font-size:.95rem}
+form{display:grid;gap:12px;max-width:520px}
+input,select,textarea{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:#fff}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--mint);border-color:var(--deep)}
+#ok{display:none;background:#e0fbef;border:1px solid #a8e6cf;padding:14px;border-radius:12px}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+footer{background:var(--ink);color:#b6ded3;padding:56px 0 30px}
+footer .vals{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:28px 0;padding:28px 0;border-top:1px solid #1f5a54;border-bottom:1px solid #1f5a54}
+footer .vals b{color:var(--mint);display:block;font-size:1.05rem;margin-bottom:4px}
+footer .vals span{font-size:.9rem}
+footer .top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+footer .logo{color:#fff}
+.slogan{font-size:1.25rem;color:#fff;font-weight:600;letter-spacing:-.01em}
+.small{font-size:.8rem;margin-top:8px}
+#chatBtn{position:fixed;right:20px;bottom:20px;z-index:30;width:56px;height:56px;border-radius:50%;background:var(--deep);color:#fff;border:0;font-size:1.5rem;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+#chat{position:fixed;right:20px;bottom:88px;z-index:30;width:320px;max-width:calc(100vw - 40px);background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:0 20px 50px rgba(6,48,45,.3);display:none;overflow:hidden}
+#chat header{background:var(--deep);color:#fff;padding:12px 16px;font-weight:600}
+#msgs{height:220px;overflow:auto;padding:12px;font-size:.9rem;display:flex;flex-direction:column;gap:8px}
+#msgs div{padding:8px 12px;border-radius:12px;max-width:88%}
+#msgs .bot{background:var(--ice)}#msgs .me{background:var(--deep);color:#fff;align-self:flex-end}
+#qs{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 12px}
+#qs button{border:1px solid var(--deep);background:#fff;border-radius:99px;padding:5px 11px;font:inherit;font-size:.78rem;cursor:pointer}
+#qs button:hover{background:var(--ice)}
+@media(max-width:860px){.hero .wrap,.demo-grid,.grid3,.story{grid-template-columns:1fr}footer .vals{grid-template-columns:1fr 1fr}.links a:not(.btn){display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a href="#" class="logo" aria-label="FreshCheck home">
+    <svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0b4f4a"/><path d="M18 34l10 10 18-22" fill="none" stroke="#7ff0c4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    FreshCheck
+  </a>
+  <div class="links">
+    <a href="#how">How it works</a><a href="#why">Why FreshCheck</a><a href="#pricing">Pricing</a><a href="#who">Who it's for</a>
+    <a class="btn" href="#demo">Book a demo</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div>
+    <span class="tag mono">IoT FOOD-SAFETY MONITORING</span>
+    <h1>Know your temperature. <em>Protect your food.</em></h1>
+    <p class="lead">FreshCheck uses smart sensors and a live dashboard to track the temperature of your food in storage and delivery — and alerts you the moment it leaves the safe range, not the next morning.</p>
+    <div class="cta"><a class="btn" href="#demo">Book a free demo</a><a class="btn alt" href="#pricing">See pricing</a></div>
+  </div>
+  <div class="panel" aria-label="Live FreshCheck dashboard demo">
+    <h3 class="mono"><span class="live">LIVE DEMO · SIMULATED DATA</span><span>Safe: 0–5°C</span></h3>
+    <div class="units" id="units"></div>
+    <div id="log" class="mono"></div>
+    <div class="row"><button id="fail">⚠ Simulate fridge failure</button><button id="fix">✓ Restore cooling</button></div>
+  </div>
+</div></header>
+
+<section id="problem"><div class="wrap">
+  <h2>The problem: you find out too late.</h2>
+  <p class="sub">Manual temperature checks only tell you the temperature at the moment someone looks. Everything in between is a blind spot.</p>
+  <div class="story">
+    <div class="card bad"><span class="n">WITHOUT FRESHCHECK</span><h3>Fridge fails at 11 pm</h3><p>Nobody notices until the morning check. Hours above a safe temperature, stock thrown out, money lost, customers potentially at risk.</p></div>
+    <div class="card good"><span class="n">WITH FRESHCHECK</span><h3>Manager is alerted at 11:07 pm</h3><p>The alert arrives while the problem is happening. The fridge is checked, stock is moved, and most of the food is saved.</p></div>
+  </div>
+</div></section>
+
+<section id="how" class="alt-bg"><div class="wrap">
+  <h2>How FreshCheck works</h2>
+  <p class="sub">Sensors, cloud platform and dashboard — delivered as one simple monthly service.</p>
+  <div class="grid3">
+    <div class="card"><span class="n">01 · SENSE</span><h3>Sensors go inside</h3><p>We install sensors in your refrigerators, freezers, cold rooms or refrigerated delivery containers. They read temperature continuously.</p></div>
+    <div class="card"><span class="n">02 · ANALYSE</span><h3>Cloud tracks it</h3><p>Readings stream to the FreshCheck cloud platform and are stored, so you always have a full temperature history.</p></div>
+    <div class="card"><span class="n">03 · ALERT</span><h3>You act early</h3><p>Set your own safe range. If a reading goes outside it, FreshCheck alerts you automatically so you can respond immediately.</p></div>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <h2>What you get</h2>
+  <p class="sub">Three benefits that protect your stock and your reputation.</p>
+  <div class="grid3">
+    <div class="card"><span class="n">PREVENTION</span><h3>Respond earlier</h3><p>Catch failing equipment or an open door while there's still time to save the stock.</p></div>
+    <div class="card"><span class="n">REDUCED WASTE</span><h3>Lose less food</h3><p>Identify problems before large quantities are lost — and review history to spot recurring issues.</p></div>
+    <div class="card"><span class="n">VISIBILITY</span><h3>One platform</h3><p>Monitor multiple storage areas, locations or delivery vehicles from a single dashboard, anywhere.</p></div>
+  </div>
+  <p class="note">Coming next: analytics that flag patterns, such as a fridge that warms up at the same time every day.</p>
+</div></section>
+
+<section id="who" class="alt-bg"><div class="wrap">
+  <h2>Built for food businesses</h2>
+  <p class="sub">Especially small and medium-sized businesses that want reliable monitoring without enterprise complexity or cost.</p>
+  <div class="who"><span>Restaurants</span><span>Supermarkets</span><span>Caterers</span><span>Food distributors</span><span>Hotels</span><span>Grocery delivery</span></div>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <h2>Simple monthly pricing</h2>
+  <p class="sub">Pay monthly for continuous monitoring instead of buying a system outright.</p>
+  <div class="grid3 plans">
+    <div class="card plan"><span class="n">STARTER</span><div class="price">TT$299<small> /month</small></div><p>For a single kitchen or shop.</p><ul><li>Up to 5 sensors</li><li>Real-time dashboard</li><li>Automatic out-of-range alerts</li><li>Temperature history</li></ul><a class="btn alt" href="#demo">Get started</a></div>
+    <div class="card plan pop"><span class="n">BUSINESS</span><div class="price">TT$599<small> /month</small></div><p>For growing, multi-area operations.</p><ul><li>Up to 15 sensors</li><li>Multiple monitoring locations</li><li>Advanced reporting</li><li>Everything in Starter</li></ul><a class="btn" href="#demo">Get started</a></div>
+    <div class="card plan"><span class="n">ENTERPRISE</span><div class="price">Custom</div><p>For distributors and multi-site groups.</p><ul><li>Custom sensor count</li><li>Any number of locations</li><li>Tailored to your operation</li><li>Priority support</li></ul><a class="btn alt" href="#demo">Talk to us</a></div>
+  </div>
+  <p class="note">A one-time setup and installation fee covers the initial sensors and installation. Pricing shown in Trinidad &amp; Tobago dollars.</p>
+</div></section>
+
+<section id="demo" class="alt-bg"><div class="wrap demo-grid">
+  <div>
+    <h2>Book your free demo</h2>
+    <p class="sub">See FreshCheck monitor a real fridge, ask questions, and find the right plan. After signing up you'll get a short email series explaining how it all works.</p>
+    <p class="mono" style="font-size:.85rem;color:var(--mut)">Or email us: <a href="mailto:hello@freshcheck.tt">hello@freshcheck.tt</a></p>
+  </div>
+  <div>
+    <form id="form">
+      <input required name="name" placeholder="Your name" aria-label="Your name">
+      <input required name="biz" placeholder="Business name" aria-label="Business name">
+      <input required type="email" name="email" placeholder="Email address" aria-label="Email address">
+      <select name="type" aria-label="Business type"><option>Restaurant</option><option>Supermarket</option><option>Caterer</option><option>Food distributor</option><option>Hotel</option><option>Grocery delivery</option><option>Other</option></select>
+      <textarea name="msg" rows="3" placeholder="Anything we should know? (e.g. number of fridges or vehicles)"></textarea>
+      <button class="btn" type="submit">Request my demo</button>
+      <div id="ok" role="status">Thanks! Your email app will open with your request pre-filled — just press send.</div>
+    </form>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="top">
+    <a href="#" class="logo"><svg viewBox="0 0 64 64" width="34" height="34"><rect width="64" height="64" rx="16" fill="#0b4f4a"/><path d="M18 34l10 10 18-22" fill="none" stroke="#7ff0c4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>FreshCheck</a>
+    <div class="slogan">Know your temperature. Protect your food.</div>
+  </div>
+  <div class="vals">
+    <div><b>Food safety</b><span>Every alert exists to keep food and customers safe.</span></div>
+    <div><b>Reliability</b><span>Monitoring you can depend on, day and night.</span></div>
+    <div><b>Affordability</b><span>Real-time technology priced for small and medium businesses.</span></div>
+    <div><b>Innovation</b><span>Always improving with data, analytics and customer feedback.</span></div>
+  </div>
+  <p>Our mission: help food businesses reduce preventable food waste and improve temperature monitoring through affordable, real-time technology.</p>
+  <p class="small">© <span id="yr"></span> FreshCheck. All rights reserved. Trinidad &amp; Tobago.</p>
+</div></footer>
+
+<button id="chatBtn" aria-label="Open chat">💬</button>
+<div id="chat" role="dialog" aria-label="FreshCheck assistant">
+  <header>FreshCheck Assistant</header>
+  <div id="msgs"><div class="bot">Hi! Ask me about pricing, installation or how alerts work.</div></div>
+  <div id="qs"></div>
+</div>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ---------- Live demo (simulated) ---------- */
+const MIN=0,MAX=5;
+const units=[
+  {n:'Kitchen fridge',t:3.2,h:[]},{n:'Walk-in cold room',t:2.4,h:[]},
+  {n:'Delivery van 1',t:3.8,h:[]},{n:'Dessert display',t:4.1,h:[]}
+];
+let failing=false, alerted=false;
+const box=document.getElementById('units'),log=document.getElementById('log');
+box.innerHTML=units.map((u,i)=>`<div class="unit" id="u${i}"><small>${u.n}</small><span class="st mono" id="s${i}">SAFE</span><b class="mono" id="t${i}">--</b><svg viewBox="0 0 100 30" preserveAspectRatio="none"><polyline id="p${i}" points=""/></svg></div>`).join('');
+function say(msg,a){const d=document.createElement('div');if(a)d.className='a';d.textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'})+'  '+msg;log.prepend(d);while(log.children.length>3)log.lastChild.remove()}
+function tick(){
+  units.forEach((u,i)=>{
+    const target=(i===0&&failing)?9:[3.2,2.4,3.8,4.1][i];
+    u.t+=(target-u.t)*(i===0&&failing?.07:.25)+(Math.random()-.5)*.25;
+    u.h.push(u.t);if(u.h.length>30)u.h.shift();
+    const bad=u.t<MIN||u.t>MAX;
+    document.getElementById('t'+i).textContent=u.t.toFixed(1)+'°C';
+    document.getElementById('s'+i).textContent=bad?'ALERT':'SAFE';
+    document.getElementById('u'+i).classList.toggle('bad',bad);
+    document.getElementById('p'+i).setAttribute('points',u.h.map((v,k)=>`${k*100/29},${30-Math.max(0,Math.min(1,(v-0)/10))*28}`).join(' '));
+    if(i===0){
+      if(bad&&!alerted){alerted=true;say('ALERT sent: '+u.n+' at '+u.t.toFixed(1)+'°C (above 5°C)',true)}
+      if(!bad&&alerted){alerted=false;say(u.n+' back in safe range')}
+    }
+  });
+}
+say('Monitoring 4 units — all within safe range');
+setInterval(tick,1000);tick();
+document.getElementById('fail').onclick=()=>{failing=true;say('Simulating cooling failure on Kitchen fridge…')};
+document.getElementById('fix').onclick=()=>{failing=false;say('Cooling restored')};
+
+/* ---------- Demo form (opens email client; no backend needed) ---------- */
+document.getElementById('form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=new FormData(e.target);
+  const body=`Name: ${f.get('name')}\nBusiness: ${f.get('biz')}\nType: ${f.get('type')}\nEmail: ${f.get('email')}\n\n${f.get('msg')||''}`;
+  document.getElementById('ok').style.display='block';
+  window.location.href='mailto:hello@freshcheck.tt?subject='+encodeURIComponent('FreshCheck demo request — '+f.get('biz'))+'&body='+encodeURIComponent(body);
+});
+
+/* ---------- FAQ chatbot ---------- */
+const faq={
+ 'How much does it cost?':'Starter is TT$299/month (up to 5 sensors). Business is TT$599/month (up to 15 sensors, multiple locations, advanced reporting). Enterprise is custom. There is also a one-time setup and installation fee.',
+ 'How does it work?':'Sensors sit inside your fridges, freezers, cold rooms or delivery containers and send readings to our cloud platform. You view everything on the dashboard and get alerts when a reading leaves your safe range.',
+ 'Who installs it?':'We do. Our team handles sensor installation, account setup and troubleshooting.',
+ 'What are alerts?':'You choose your safe temperature range. If a sensor goes outside it, FreshCheck alerts you automatically so you can act right away.',
+ 'Can I try it?':'Yes — use the "Book a free demo" form on this page and we will show you FreshCheck in action.'
+};
+const msgs=document.getElementById('msgs'),qs=document.getElementById('qs'),chat=document.getElementById('chat');
+function add(c,t){const d=document.createElement('div');d.className=c;d.textContent=t;msgs.append(d);msgs.scrollTop=msgs.scrollHeight}
+Object.keys(faq).forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>{add('me',q);setTimeout(()=>add('bot',faq[q]),350)};qs.append(b)});
+document.getElementById('chatBtn').onclick=()=>{chat.style.display=chat.style.display==='block'?'none':'block'};
+</script>
+</body>
+</html>
