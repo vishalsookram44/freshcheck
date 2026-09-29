@@ -81,6 +81,24 @@ form{display:grid;gap:12px;max-width:520px}
 input,select,textarea{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:#fff}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--mint);border-color:var(--deep)}
 #ok{display:none;background:#e0fbef;border:1px solid #a8e6cf;padding:14px;border-radius:12px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:34px}
+.stat{border-left:4px solid var(--mint);background:#fff;padding:18px 20px;border-radius:0 var(--r) var(--r) 0}
+.stat b{display:block;font-size:2.4rem;font-weight:800;letter-spacing:-.03em;color:var(--deep);line-height:1.1}
+.stat span{font-size:.92rem;color:var(--mut)}
+.calc{background:var(--ink);color:#e6fff6;border-radius:var(--r);padding:30px;display:grid;grid-template-columns:1.1fr 1fr;gap:34px}
+.calc h3{font-size:1.5rem;letter-spacing:-.02em;margin-bottom:6px}
+.calc p{color:#b6ded3;font-size:.95rem}
+.calc label{display:block;font-size:.85rem;color:var(--mint);margin-top:16px}
+.calc input[type=number]{background:#0d3f3b;border-color:#2e6b64;color:#fff;margin-top:4px}
+.calc input[type=range]{padding:0;border:0;accent-color:var(--mint);margin-top:6px}
+.res{background:#0d3f3b;border-radius:14px;padding:22px;align-self:center}
+.res small{color:#9fd6c6;display:block;font-size:.8rem}
+.res .big{font-size:2.5rem;font-weight:800;letter-spacing:-.03em;color:#ff9a7a;line-height:1.1;margin:2px 0 14px}
+.res .big.ok{color:var(--mint)}
+.res .line{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid #1f5a54;font-size:.92rem}
+.src{font-size:.8rem;color:var(--mut);margin-top:14px}
+#formErr{display:none;background:#fff1ec;border:1px solid #f1c4b6;padding:14px;border-radius:12px}
+.hp{position:absolute;left:-9999px}
 .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
 footer{background:var(--ink);color:#b6ded3;padding:56px 0 30px}
 footer .vals{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:28px 0;padding:28px 0;border-top:1px solid #1f5a54;border-bottom:1px solid #1f5a54}
@@ -99,7 +117,7 @@ footer .logo{color:#fff}
 #qs{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 12px}
 #qs button{border:1px solid var(--deep);background:#fff;border-radius:99px;padding:5px 11px;font:inherit;font-size:.78rem;cursor:pointer}
 #qs button:hover{background:var(--ice)}
-@media(max-width:860px){.hero .wrap,.demo-grid,.grid3,.story{grid-template-columns:1fr}footer .vals{grid-template-columns:1fr 1fr}.links a:not(.btn){display:none}}
+@media(max-width:860px){.stats,.calc{grid-template-columns:1fr}.hero .wrap,.demo-grid,.grid3,.story{grid-template-columns:1fr}footer .vals{grid-template-columns:1fr 1fr}.links a:not(.btn){display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -111,7 +129,7 @@ footer .logo{color:#fff}
     FreshCheck
   </a>
   <div class="links">
-    <a href="#how">How it works</a><a href="#why">Why FreshCheck</a><a href="#pricing">Pricing</a><a href="#who">Who it's for</a>
+    <a href="#why-now">Why now</a><a href="#how">How it works</a><a href="#why">Why FreshCheck</a><a href="#pricing">Pricing</a><a href="#who">Who it's for</a>
     <a class="btn" href="#demo">Book a demo</a>
   </div>
 </div></nav>
@@ -140,7 +158,37 @@ footer .logo{color:#fff}
   </div>
 </div></section>
 
-<section id="how" class="alt-bg"><div class="wrap">
+<section id="why-now" class="alt-bg"><div class="wrap">
+  <h2>Why now: food waste is expensive</h2>
+  <p class="sub">Food waste is a global problem, and food service and retail are a large part of it. Cold storage failures are one of the most preventable causes for a business.</p>
+  <div class="stats">
+    <div class="stat"><b>1.05 bn</b><span>tonnes of food wasted worldwide in 2022</span></div>
+    <div class="stat"><b>19%</b><span>of food available to consumers was wasted</span></div>
+    <div class="stat"><b>290 m</b><span>tonnes of that came from food service alone</span></div>
+  </div>
+  <div class="calc">
+    <div>
+      <h3>What could one bad night cost you?</h3>
+      <p>Adjust the sliders to your own business. This is an illustrative estimate, not a guarantee.</p>
+      <label for="cStock">Value of food in your cold storage: <b id="vStock"></b></label>
+      <input type="range" id="cStock" min="1000" max="100000" step="500" value="8000">
+      <label for="cFail">Temperature failures per year: <b id="vFail"></b></label>
+      <input type="range" id="cFail" min="1" max="12" step="1" value="2">
+      <label for="cLoss">Share of stock lost when found late: <b id="vLoss"></b></label>
+      <input type="range" id="cLoss" min="10" max="100" step="5" value="50">
+    </div>
+    <div class="res">
+      <small>Estimated food loss per year</small>
+      <div class="big" id="rLoss">TT$0</div>
+      <div class="line"><span>Starter plan (12 months)</span><b id="rPlan">TT$3,588</b></div>
+      <div class="line"><span>If alerts save half of that loss</span><b id="rSave">TT$0</b></div>
+      <div class="line"><span>Net result</span><b id="rNet">TT$0</b></div>
+    </div>
+  </div>
+  <p class="src">Global figures: UN Environment Programme, Food Waste Index Report 2024 (data for 2022). Calculator uses your inputs only and excludes setup fees.</p>
+</div></section>
+
+<section id="how"><div class="wrap">
   <h2>How FreshCheck works</h2>
   <p class="sub">Sensors, cloud platform and dashboard — delivered as one simple monthly service.</p>
   <div class="grid3">
@@ -150,7 +198,7 @@ footer .logo{color:#fff}
   </div>
 </div></section>
 
-<section id="why"><div class="wrap">
+<section id="why" class="alt-bg"><div class="wrap">
   <h2>What you get</h2>
   <p class="sub">Three benefits that protect your stock and your reputation.</p>
   <div class="grid3">
@@ -161,7 +209,7 @@ footer .logo{color:#fff}
   <p class="note">Coming next: analytics that flag patterns, such as a fridge that warms up at the same time every day.</p>
 </div></section>
 
-<section id="who" class="alt-bg"><div class="wrap">
+<section id="who"><div class="wrap">
   <h2>Built for food businesses</h2>
   <p class="sub">Especially small and medium-sized businesses that want reliable monitoring without enterprise complexity or cost.</p>
   <div class="who"><span>Restaurants</span><span>Supermarkets</span><span>Caterers</span><span>Food distributors</span><span>Hotels</span><span>Grocery delivery</span></div>
@@ -185,14 +233,16 @@ footer .logo{color:#fff}
     <p class="mono" style="font-size:.85rem;color:var(--mut)">Or email us: <a href="mailto:hello@freshcheck.tt">hello@freshcheck.tt</a></p>
   </div>
   <div>
-    <form id="form">
+    <form id="form" novalidate>
+      <input class="hp" type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input required name="name" placeholder="Your name" aria-label="Your name">
       <input required name="biz" placeholder="Business name" aria-label="Business name">
       <input required type="email" name="email" placeholder="Email address" aria-label="Email address">
       <select name="type" aria-label="Business type"><option>Restaurant</option><option>Supermarket</option><option>Caterer</option><option>Food distributor</option><option>Hotel</option><option>Grocery delivery</option><option>Other</option></select>
       <textarea name="msg" rows="3" placeholder="Anything we should know? (e.g. number of fridges or vehicles)"></textarea>
-      <button class="btn" type="submit">Request my demo</button>
-      <div id="ok" role="status">Thanks! Your email app will open with your request pre-filled — just press send.</div>
+      <button class="btn" type="submit" id="sendBtn">Request my demo</button>
+      <div id="ok" role="status"></div>
+      <div id="formErr" role="alert"></div>
     </form>
   </div>
 </div></section>
@@ -253,14 +303,46 @@ setInterval(tick,1000);tick();
 document.getElementById('fail').onclick=()=>{failing=true;say('Simulating cooling failure on Kitchen fridge…')};
 document.getElementById('fix').onclick=()=>{failing=false;say('Cooling restored')};
 
-/* ---------- Demo form (opens email client; no backend needed) ---------- */
-document.getElementById('form').addEventListener('submit',e=>{
-  e.preventDefault();
-  const f=new FormData(e.target);
-  const body=`Name: ${f.get('name')}\nBusiness: ${f.get('biz')}\nType: ${f.get('type')}\nEmail: ${f.get('email')}\n\n${f.get('msg')||''}`;
-  document.getElementById('ok').style.display='block';
-  window.location.href='mailto:hello@freshcheck.tt?subject='+encodeURIComponent('FreshCheck demo request — '+f.get('biz'))+'&body='+encodeURIComponent(body);
+/* ---------- Lead capture (Web3Forms) ---------- */
+// 1) Get a free access key at https://web3forms.com (enter your email, key is emailed to you)
+// 2) Paste it below. Leads will arrive in that inbox.
+const WEB3FORMS_KEY='PASTE_YOUR_ACCESS_KEY_HERE';
+const FALLBACK_EMAIL='hello@freshcheck.tt';
+const form=document.getElementById('form'),ok=document.getElementById('ok'),err=document.getElementById('formErr'),sendBtn=document.getElementById('sendBtn');
+form.addEventListener('submit',async e=>{
+  e.preventDefault();ok.style.display=err.style.display='none';
+  if(!form.checkValidity()){form.reportValidity();return}
+  const f=Object.fromEntries(new FormData(form));
+  if(f.botcheck)return; // spam trap
+  if(WEB3FORMS_KEY.startsWith('PASTE')){ // not configured yet: fall back to email
+    const body=`Name: ${f.name}\nBusiness: ${f.biz}\nType: ${f.type}\nEmail: ${f.email}\n\n${f.msg||''}`;
+    window.location.href='mailto:'+FALLBACK_EMAIL+'?subject='+encodeURIComponent('FreshCheck demo request — '+f.biz)+'&body='+encodeURIComponent(body);
+    return;
+  }
+  sendBtn.disabled=true;sendBtn.textContent='Sending…';
+  try{
+    const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({access_key:WEB3FORMS_KEY,subject:'New FreshCheck demo request — '+f.biz,from_name:'FreshCheck Website',
+        name:f.name,business:f.biz,business_type:f.type,email:f.email,message:f.msg||'(none)',botcheck:''})});
+    const d=await r.json();
+    if(!r.ok||!d.success)throw new Error(d.message||'Request failed');
+    form.reset();ok.textContent='Thanks '+f.name.split(' ')[0]+'! We received your request and will contact you at '+f.email+' shortly.';ok.style.display='block';
+  }catch(x){
+    err.innerHTML='Sorry, something went wrong sending your request. Please email us at <a href="mailto:'+FALLBACK_EMAIL+'">'+FALLBACK_EMAIL+'</a>.';err.style.display='block';
+  }finally{sendBtn.disabled=false;sendBtn.textContent='Request my demo'}
 });
+
+/* ---------- Cost of food waste calculator ---------- */
+const $=id=>document.getElementById(id),tt=n=>'TT$'+Math.round(n).toLocaleString('en-US');
+function calc(){
+  const st=+$('cStock').value,fl=+$('cFail').value,lo=+$('cLoss').value;
+  $('vStock').textContent=tt(st);$('vFail').textContent=fl;$('vLoss').textContent=lo+'%';
+  const loss=st*fl*lo/100,plan=299*12,save=loss/2,net=save-plan;
+  $('rLoss').textContent=tt(loss);$('rPlan').textContent=tt(plan);$('rSave').textContent=tt(save);
+  $('rNet').textContent=(net>=0?'+':'−')+tt(Math.abs(net));
+  $('rLoss').classList.toggle('ok',false);
+}
+['cStock','cFail','cLoss'].forEach(i=>$(i).addEventListener('input',calc));calc();
 
 /* ---------- FAQ chatbot ---------- */
 const faq={
