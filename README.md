@@ -123,60 +123,7 @@ flowchart LR
 └── vercel.json           # Clean URLs and security headers
 ```
 
-## Run it locally
 
-You need Python 3.10 or newer.
-
-```bash
-git clone <your-fork-or-clone-url>
-cd <repo-folder>
-
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-
-cp .env.example .env             # Windows: copy .env.example .env
-uvicorn backend.main:app --reload
-```
-
-Open **http://localhost:8000**. With `ENV=development` (the default) the API also serves the `public/` folder, so the whole site runs on one port. A local `freshcheck.db` SQLite file is created on first run.
-
-Notes for local use:
-- Email is optional. Without mail settings, alert, welcome and password-reset emails are skipped silently, so password reset won't deliver a link. Add `SMTP_*` or `RESEND_API_KEY` to `.env` to test them.
-- To use `/admin`, put the email you sign up with in `ADMIN_EMAILS`.
-- To test the real-sensor feed from a phone, your server must be reachable from the internet (a deployed preview, or a tunnelling tool).
-
-## Configuration
-
-All settings are environment variables (a `.env` file locally). See [`.env.example`](.env.example).
-
-| Variable | Required | Purpose |
-|---|---|---|
-| `DATABASE_URI` | Yes in production | Database URL. Neon: `postgresql+psycopg://USER:PASSWORD@HOST/DB?sslmode=require`. Local default: `sqlite:///./freshcheck.db` |
-| `SECRET_KEY` | **Yes** | Signs login cookies and reset links, and derives device keys. Use a long random string |
-| `ENV` | Yes in production | `production` makes cookies HTTPS-only and disables the local static server. Default `development` |
-| `ADMIN_EMAILS` | For `/admin` | Comma-separated emails allowed to open the admin page |
-| `RESEND_API_KEY`, `MAIL_FROM` | Optional | Send email through Resend |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM` | Optional | Send email through SMTP (port 587, STARTTLS). For Gmail use an **app password** |
-
-Generate a secret:
-
-```bash
-python -c "import secrets; print(secrets.token_urlsafe(48))"
-```
-
-## Deploy to Vercel + Neon
-
-1. **Create a Neon project** and copy its connection string. Use the `postgresql+psycopg://...` form.
-2. **Push this repo to GitHub** and import it in Vercel.
-3. In Vercel's project settings use:
-   - Root Directory: `./`
-   - Framework preset: **FastAPI**
-   - Install Command: `pip install -r requirements.txt`
-   - Build Command and Output Directory: leave empty
-4. Add the environment variables: `DATABASE_URI`, `SECRET_KEY`, `ENV=production`, `ADMIN_EMAILS`, and your email settings.
-5. **Deploy.** Tables are created automatically on the first request.
-6. After changing environment variables, **redeploy**. New values only apply to new deployments.
 
 ## Using a real sensor
 
@@ -216,31 +163,6 @@ This is the route an ESP32 with a temperature probe, or a small relay for a Blue
 
 > The demo limits each account to **one live sensor**, and keeps readings for 7 days.
 
-## API reference
-
-JSON over HTTPS. "Cookie" means the signed-in session cookie.
-
-| Method | Path | Auth | Purpose |
-|---|---|---|---|
-| POST | `/api/request-demo` | none | Create or update a profile; returns a 30-minute setup token |
-| POST | `/api/set-password` | setup token | Set the password, sign in, send the welcome email |
-| POST | `/api/login` | none | Sign in (sets the session cookie) |
-| POST | `/api/logout` | none | Clear the session cookie |
-| GET | `/api/me` | cookie | Current user (includes an `admin` flag) |
-| POST | `/api/forgot-password` | none | Email a one-time reset link (same reply whether or not the account exists) |
-| POST | `/api/reset-password` | reset token | Choose a new password and sign in |
-| GET / PUT | `/api/state` | cookie | Per-user dashboard settings (safe ranges, acknowledgements, preferences) |
-| GET | `/api/device-key` | cookie | The account's device key and whether email is configured |
-| POST | `/api/readings` | `X-API-Key` | Push a reading from a device or script |
-| POST | `/api/simulate-reading` | cookie | Push a reading from the dashboard's Add sensor popup |
-| GET | `/api/readings` | cookie | Latest readings (last 24 h, up to 60 per sensor) |
-| GET | `/api/readings/history` | cookie | Up to 5,000 readings from the last 7 days |
-| DELETE | `/api/readings[?sensor=NAME]` | cookie | Remove one live sensor, or all of them |
-| POST | `/api/ingest/sensor-logger` | `Authorization: Bearer <key>` | Push URL for the Sensor Logger app |
-| GET | `/api/ingest-status` | cookie | Diagnostic: what Sensor Logger last sent if no temperature was found |
-| POST | `/api/test-email` | cookie | Send a test email to the signed-in user |
-| GET | `/api/admin/demo-requests` | admin cookie | List all demo requests |
-| DELETE | `/api/admin/demo-requests/{id}` | admin cookie | Delete an account and its data |
 
 ## Design decisions
 
